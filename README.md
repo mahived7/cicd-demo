@@ -1,99 +1,99 @@
-# Task 7: Environment Variables & PATH
+# CI/CD Pipeline with GitHub Actions & Docker
 
-## 📌 Overview
-This project demonstrates how to work with **Environment Variables** and **PATH** configuration on Linux (and Windows). It covers viewing, creating, modifying, persisting, testing, and debugging environment variables.
-
----
-
-## 🛠️ Tools Used
-- **Primary:** Linux Shell (Bash)
-- **Alternative:** Windows Command Prompt / PowerShell
+A full end-to-end CI/CD pipeline that automatically tests, builds, and deploys a Node.js application using GitHub Actions, Docker, and Kubernetes (Minikube).
 
 ---
 
-## 📁 Project Structure
-```
-task7-env-vars/
-├── README.md               ← This file
-├── docs/
-│   ├── step-by-step.md     ← Detailed guide for all 7 steps
-│   └── env_config.txt      ← Documented environment configuration
-├── screenshots/
-│   └── (add your terminal screenshots here)
-└── scripts/
-    └── setup_env.sh        ← Shell script to automate setup
-```
+## Pipeline Overview
+
+Every time code is pushed to the \main\ branch, the pipeline automatically:
+
+1. Runs unit tests with Jest
+2. Builds a Docker image
+3. Pushes the image to Docker Hub
+4. The image is deployed to a Kubernetes cluster (Minikube)
 
 ---
 
-## 🚀 Steps Completed
+## Tech Stack
 
-| Step | Task | Status |
-|------|------|--------|
-| 1 | View environment variables | ✅ Done |
-| 2 | Create custom variables | ✅ Done |
-| 3 | Modify PATH variable | ✅ Done |
-| 4 | Make variables persistent | ✅ Done |
-| 5 | Test changes | ✅ Done |
-| 6 | Debug PATH issues | ✅ Done |
-| 7 | Document configuration | ✅ Done |
-
----
-
-## ⚡ Quick Start
-
-Clone the repo and run the setup script:
-```bash
-git clone https://github.com/YOUR_USERNAME/task7-env-vars.git
-cd task7-env-vars
-chmod +x scripts/setup_env.sh
-./scripts/setup_env.sh
-```
+| Tool | Purpose |
+|------|---------|
+| Node.js + Express | Application runtime |
+| Jest + Supertest | Unit testing |
+| Docker | Containerization |
+| GitHub Actions | CI/CD automation |
+| Docker Hub | Container image registry |
+| Minikube | Local Kubernetes cluster |
+| kubectl | Kubernetes CLI |
 
 ---
 
-## 📝 Key Commands Reference
+## Project Structure
 
-### View Variables
-```bash
-printenv              # All environment variables
-echo $PATH            # View PATH
-echo $HOME            # View HOME
-```
-
-### Create Variables
-```bash
-export MY_NAME="John"
-export MY_APP_PORT=8080
-```
-
-### Modify PATH
-```bash
-export PATH=$PATH:/home/user/my-scripts
-```
-
-### Make Persistent
-```bash
-echo 'export MY_NAME="John"' >> ~/.bashrc
-echo 'export MY_APP_PORT=8080' >> ~/.bashrc
-source ~/.bashrc
-```
-
-### Debug PATH
-```bash
-echo $PATH | tr ':' '\n'         # Readable PATH list
-which python3                     # Find command location
-echo $PATH | tr ':' '\n' | sort | uniq -d  # Find duplicates
-```
+\\\
+cicd-demo/
++-- .github/
+�   +-- workflows/
+�       +-- cicd.yml
++-- k8s/
+�   +-- deployment.yml
++-- app.js
++-- app.test.js
++-- Dockerfile
++-- package.json
++-- README.md
+\\\
 
 ---
 
-## 🎯 Final Outcome
-Intern understands runtime configuration — how to set, persist, and debug environment variables across Linux and Windows systems.
+## Getting Started
+
+### Run Locally
+
+\\\ash
+git clone https://github.com/mahived7/cicd-demo.git
+cd cicd-demo
+npm install
+npm test
+node app.js
+\\\
+
+### Run with Docker
+
+\\\ash
+docker build -t cicd-demo .
+docker run -p 3000:3000 cicd-demo
+\\\
+
+### Deploy to Minikube
+
+\\\ash
+minikube start --driver=docker
+kubectl apply -f k8s/deployment.yml
+kubectl get pods
+minikube service cicd-demo-svc --url
+\\\
 
 ---
 
-## 👤 Author
-- **Name:** Your Name
-- **Internship Task:** Task 7 — Environment Variables & PATH
-- **Date:** February 2026
+## GitHub Secrets Required
+
+| Secret | Description |
+|--------|-------------|
+| \DOCKERHUB_USERNAME\ | Your Docker Hub username |
+| \DOCKERHUB_TOKEN\ | Docker Hub personal access token |
+
+---
+
+## Docker Hub
+
+\\\
+docker pull vedantanantkumaritkikar/cicd-demo:latest
+\\\
+
+---
+
+## Author
+
+**Mahived** � [github.com/mahived7](https://github.com/mahived7)
